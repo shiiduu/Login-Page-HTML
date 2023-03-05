@@ -1,22 +1,26 @@
 <?php
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-$filename = "users.txt";
-$users = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+$file = fopen("users.txt", "r");
 
-$username = $_POST["username"];
-$password = $_POST["password"];
-$loggedin = false;
-foreach ($users as $user) {
-  list($stored_username, $stored_password) = explode(":", $user);
-  if ($username == $stored_username && $password == $stored_password) {
-    $loggedin = true;
+$loggedIn = false;
+while (!feof($file)) {
+  $line = fgets($file);
+  $lineData = explode(",", $line);
+  if ($lineData[0] == $username && $lineData[1] == $password) {
+    $loggedIn = true;
     break;
   }
 }
 
-if ($loggedin) {
-  echo "Du bist jetzt eingelogged";
+
+fclose($file);
+
+
+if ($loggedIn) {
+  header("Location: dashboard.php");
 } else {
-  echo "Dein Username oder Passwort ist falsch";
+  echo "Invalid username or password.";
 }
 ?>
