@@ -2,52 +2,40 @@
 <html>
   <head>
     <title>Login Page</title>
-    <style>
-      /* Add some basic styling to the page */
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-      }
-      h1 {
-        text-align: center;
-        margin-top: 50px;
-      }
-      form {
-        width: 300px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      }
-      input[type="text"],
-      input[type="password"],
-      input[type="submit"] {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-      }
-      input[type="submit"] {
-        background-color: #4CAF50;
-        color: #fff;
-        font-weight: bold;
-      }
-      input[type="submit"]:hover {
-        background-color: #3e8e41;
-      }
-    </style>
   </head>
   <body>
     <h1>Login</h1>
-    <form action="login.php" method="POST">
+    <form name="login-form" method="POST">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
       <input type="submit" value="Login">
     </form>
+    <script>
+      function validateForm() {
+        var username = document.forms["login-form"]["username"].value;
+        var password = document.forms["login-form"]["password"].value;
+     // Da ich hier auf php serverside file checking verzichtet habe lege ich ein Passwort hier im array users fest.
+     // Hier wäre zB. ein erfolgreicher login mit den Username Lukas Hofer und den Passwort LukasHofer2005.
+        var users = ["LukasHofer:LukasHofer2005", "User2:Passwort2", "User3:Passwort3"];
+        var authenticated = false;
+        for (var i = 0; i < users.length; i++) {
+          var user = users[i].split(":");
+          if (user[0] === username && user[1] === password) {
+            authenticated = true;
+            break;
+          }
+        }
+        if (authenticated) {
+          alert("Login successful!");
+          
+        } else {
+          alert("Incorrect username or password");
+        }
+        return false;
+      }
+      document.forms["login-form"].onsubmit = validateForm;
+    </script>
   </body>
 </html>
