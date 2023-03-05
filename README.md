@@ -1,3 +1,4 @@
+Mein Name ist Lukas Hofer. 
 Dies ist eine Praktische Arbeit die ich entschlossen habe hier auf GitHub hochzuladen. Es ist eine simple LoginWebsite aus HTML und JavaScript. 
 Den Username und das Passwort muss man jedoch im Code selber unter dem Array "users" festlegen.
 Ein beispiel welches Funktionieren sollte wäre hier:
